@@ -21,20 +21,22 @@ class BlockerForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    // This is the non-autocomplete version.
+    /*
+    $form['username'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Username'),
+      '#description' => $this->t('Enter the username of the user you want to block.'),
+      '#maxlength' => 64,
+      '#size' => 64,
+    );
+    */
 
-    $form['message'] = [
-      '#type' => 'textarea',
-      '#title' => $this->t('Message'),
-      '#required' => TRUE,
-    ];
-
-    $form['actions'] = [
-      '#type' => 'actions',
-    ];
-    $form['actions']['submit'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Send'),
-    ];
+    // This is the autocomplete version.
+    $form['uid'] = array(
+      '#type' => 'entity_autocomplete',
+      '#target_type' => 'user',
+    );
 
     $form['submit'] = [
       '#type' => 'submit',
@@ -46,16 +48,10 @@ class BlockerForm extends FormBase {
 
   /**
    * {@inheritdoc}
+   *
+   * This the non-autocomplete version.
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    if (mb_strlen($form_state->getValue('message')) < 10) {
-      $form_state->setErrorByName('name', $this->t('Message should be at least 10 characters.'));
-    }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
+  /*
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $username = $form_state->getValue('username');
     $user = user_load_by_name($username);
@@ -63,10 +59,27 @@ class BlockerForm extends FormBase {
     $user->save();
     drupal_set_message($this->t('User @username has been blocked.', ['@username' => $username]));
   }
+  */
+  /**
+   * {@inheritdoc}
+   *
+   * This the autocomplete version.
+   */
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    $uid = $form_state->getValue('uid');
+    /** @var User $user */
+    $user = user_load($uid);
+    $user->block();
+    $user->save();
+    drupal_set_message($this->t('User @username has been blocked.', ['@username' => $user->name]));
+  }
 
   /**
   * {@inheritdoc}
+  *
+  * This is the non-autocomplete version.
   */
+  /*
   public function validateForm(array &$form, FormStateInterface $form_state) {
     $username = $form_state->getValue('username');
     $user = user_load_by_name($username);
@@ -81,6 +94,30 @@ class BlockerForm extends FormBase {
       if ($user->id() == $current_user->id()) {
         $form_state->setError(
           $form['username'],
+          $this->t('You cannot block your own account.')
+        );
+      }
+    }
+  }
+  */
+  /**
+   * {@inheritdoc}
+   *
+   * This is the autocomplete version.
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    $uid = $form_state->getValue('uid');
+    if (empty($uid)) {
+      $form_state->setError(
+        $form['uid'],
+        $this->t('User was not found.')
+      );
+    }
+    else {
+      $current_user = \Drupal::currentUser();
+      if ($uid == $current_user->id()) {
+        $form_state->setError(
+          $form['uid'],
           $this->t('You cannot block your own account.')
         );
       }
