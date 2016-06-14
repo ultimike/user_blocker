@@ -1,0 +1,7 @@
+user_blocker.blocker_form:
+  title: 'User blocker'
+  description: 'Block a user.'
+  parent: entity.user.collection
+  route_name: user_blocker.blocker_form
+  weight: 100
+  menu_name: admin
