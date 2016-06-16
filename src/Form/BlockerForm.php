@@ -34,6 +34,8 @@ final class BlockerForm extends FormBase {
 
     // This is the autocomplete version.
     $form['uid'] = array(
+      '#title' => $this->t('Username'),
+      '#description' => $this->t('Enter the username of the user you want to block.'),
       '#type' => 'entity_autocomplete',
       '#target_type' => 'user',
     );
