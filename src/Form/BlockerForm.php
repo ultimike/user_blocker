@@ -33,8 +33,8 @@ class BlockerForm extends FormBase {
     );
     
     $form['submit'] = [
-        '#type' => 'submit',
-        '#value' => $this->t('Submit'),
+      '#type' => 'submit',
+      '#value' => $this->t('Submit'),
     ];
 
     return $form;
