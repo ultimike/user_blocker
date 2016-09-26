@@ -1,4 +1,4 @@
-user_blocker.blocker_form:
+user_blocker.blocker_form_menu_item:
   title: 'User blocker'
   description: 'Block a user.'
   parent: entity.user.collection
