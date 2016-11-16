@@ -73,7 +73,7 @@ final class BlockerForm extends FormBase {
     $user = user_load($uid);
     $user->block();
     $user->save();
-    drupal_set_message($this->t('User @username has been blocked.', ['@username' => $user->name]));
+    drupal_set_message($this->t('User @username has been blocked.', ['@username' => $user->getAccountName()]));
   }
 
   /**
