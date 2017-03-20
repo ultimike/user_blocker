@@ -1,7 +1,7 @@
 name: User blocker
 type: module
-description: Allows privileged users to block other users.
+description: Allows privileged users the ability to block other users.
 core: 8.x
-package: DrupalEasy
+package: Custom
 dependencies:
   - user

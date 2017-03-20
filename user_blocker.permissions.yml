@@ -1,4 +1,4 @@
 
 block users:
   title: 'Block users'
-  description: 'Allows privileged users to block other users.'
+  description: 'Allows privileged users the ability to block other users.'
