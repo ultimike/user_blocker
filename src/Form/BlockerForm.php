@@ -109,20 +109,12 @@ final class BlockerForm extends FormBase {
    */
   public function validateForm(array &$form, FormStateInterface $form_state): void {
     $uid = $form_state->getValue('uid');
-    if (empty($uid)) {
+    $current_user = \Drupal::currentUser();
+    if ($uid == $current_user->id()) {
       $form_state->setError(
         $form['uid'],
-        $this->t('User was not found.')
+        $this->t('You cannot block your own account.')
       );
-    }
-    else {
-      $current_user = \Drupal::currentUser();
-      if ($uid == $current_user->id()) {
-        $form_state->setError(
-          $form['uid'],
-          $this->t('You cannot block your own account.')
-        );
-      }
     }
   }
 
