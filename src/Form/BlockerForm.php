@@ -88,7 +88,7 @@ final class BlockerForm extends FormBase {
     if (empty($user)) {
       $form_state->setError(
         $form['username'],
-        $this->t('User @username was not found.', ['@username' => $username])
+        $this->t('User %username was not found.', ['%username' => $username])
       );
     }
     else {
@@ -116,6 +116,34 @@ final class BlockerForm extends FormBase {
         $this->t('You cannot block your own account.')
       );
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * This the non-autocomplete version.
+   */
+  /*
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    $username = $form_state->getValue('username');
+    $user = user_load_by_name($username);
+    $user->block();
+    $user->save();
+    drupal_set_message($this->t('User %username has been blocked.', ['%username' => $username]));
+  }
+  */
+  /**
+   * {@inheritdoc}
+   *
+   * This the autocomplete version.
+   */
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    $uid = $form_state->getValue('uid');
+    /** @var User $user */
+    $user = user_load($uid);
+    $user->block();
+    $user->save();
+    drupal_set_message($this->t('User %username has been blocked.', ['%username' => $user->getAccountName()]));
   }
 
 }
