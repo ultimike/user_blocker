@@ -7,8 +7,6 @@ use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Class BlockerForm.
- *
- * @package Drupal\user_blocker\Form
  */
 class BlockerForm extends FormBase {
 
@@ -30,8 +28,8 @@ class BlockerForm extends FormBase {
       '#description' => $this->t('Enter the username of the user you want to block.'),
       '#maxlength' => 64,
       '#size' => 64,
+      '#weight' => '0',
     ];
-
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
@@ -41,8 +39,8 @@ class BlockerForm extends FormBase {
   }
 
   /**
-    * {@inheritdoc}
-    */
+   * {@inheritdoc}
+   */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     parent::validateForm($form, $form_state);
   }
@@ -53,7 +51,7 @@ class BlockerForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Display result.
     foreach ($form_state->getValues() as $key => $value) {
-        drupal_set_message($key . ': ' . $value);
+      drupal_set_message($key . ': ' . $value);
     }
 
   }
