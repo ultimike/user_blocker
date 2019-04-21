@@ -4,6 +4,7 @@ namespace Drupal\user_blocker\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\user\Entity\User;
 
 /**
  * Provides a User blocker form.
@@ -139,11 +140,10 @@ final class BlockerForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $uid = $form_state->getValue('uid');
-    /** @var User $user */
-    $user = user_load($uid);
+    $user = User::load($uid);
     $user->block();
     $user->save();
-    drupal_set_message($this->t('User %username has been blocked.', ['%username' => $user->getAccountName()]));
+    $this->messenger()->addMessage(t('User %username has been blocked.', ['%username' => $user->getAccountName()]));
   }
 
 }
