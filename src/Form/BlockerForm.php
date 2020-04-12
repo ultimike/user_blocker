@@ -22,28 +22,28 @@ class BlockerForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    // This is the non-autocomplete version.
     /*
-    $form['username'] = array(
+    // This is the autocomplete version.
+    $form['username'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Username'),
       '#description' => $this->t('Enter the username of the user you want to block.'),
       '#maxlength' => 64,
       '#size' => 64,
-    );
+      '#weight' => '0',
+    ];
     */
-
     // This is the autocomplete version.
-    $form['uid'] = array(
+    $form['uid'] = [
       '#title' => $this->t('Username'),
       '#description' => $this->t('Enter the username of the user you want to block.'),
       '#type' => 'entity_autocomplete',
       '#target_type' => 'user',
-    );
+    ];
 
     $form['submit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Block User'),
+      '#value' => $this->t('Submit'),
     ];
 
     return $form;
@@ -52,38 +52,11 @@ class BlockerForm extends FormBase {
   /**
    * {@inheritdoc}
    *
-   * This the non-autocomplete version.
+   * This is the non-autocomplete version.
    */
-  /*
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-    $username = $form_state->getValue('username');
-    $user = user_load_by_name($username);
-    $user->block();
-    $user->save();
-    drupal_set_message($this->t('User @username has been blocked.', ['@username' => $username]));
-  }
-  */
-  /**
-   * {@inheritdoc}
-   *
-   * This the autocomplete version.
-   */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-    $uid = $form_state->getValue('uid');
-    /** @var User $user */
-    $user = user_load($uid);
-    $user->block();
-    $user->save();
-    drupal_set_message($this->t('User @username has been blocked.', ['@username' => $user->getAccountName()]));
-  }
-
-  /**
-  * {@inheritdoc}
-  *
-  * This is the non-autocomplete version.
-  */
   /*
   public function validateForm(array &$form, FormStateInterface $form_state) {
+    parent::validateForm($form, $form_state);
     $username = $form_state->getValue('username');
     $user = user_load_by_name($username);
     if (empty($user)) {
@@ -122,7 +95,7 @@ class BlockerForm extends FormBase {
   /**
    * {@inheritdoc}
    *
-   * This the non-autocomplete version.
+   * This is the non-autocomplete version.
    */
   /*
   public function submitForm(array &$form, FormStateInterface $form_state) {
@@ -130,7 +103,7 @@ class BlockerForm extends FormBase {
     $user = user_load_by_name($username);
     $user->block();
     $user->save();
-    drupal_set_message($this->t('User %username has been blocked.', ['%username' => $username]));
+    $this->messenger()->addMessage($this->t('User %username has been blocked.', ['%username' => $user->getAccountName()]));
   }
   */
   /**
@@ -143,7 +116,7 @@ class BlockerForm extends FormBase {
     $user = User::load($uid);
     $user->block();
     $user->save();
-    $this->messenger()->addMessage(t('User %username has been blocked.', ['%username' => $user->getAccountName()]));
+    $this->messenger()->addMessage($this->t('User @username has been blocked.', ['@username' => $user->getAccountName()]));
   }
 
 }
