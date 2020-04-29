@@ -16,4 +16,4 @@ access to Drupal Console or Drush.
 
 The "complete" branch contains the completed module, based on workshop instructions.
 
-Mike is bad at accecpting pull requests
+Mike, although you are bad at accepting pull requests, please accept this pull request.
