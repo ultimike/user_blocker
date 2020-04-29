@@ -15,5 +15,3 @@ The "master" branch contains the starting point for the exercise, useful for tho
 access to Drupal Console or Drush. 
 
 The "complete" branch contains the completed module, based on workshop instructions.
-
-Mike, although you are bad at accepting pull requests, please accept this pull request.
