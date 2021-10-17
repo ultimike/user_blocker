@@ -8,10 +8,10 @@ written by DrupalEasy and Six Mile Tech. For additional information about this
 workshop, see https://www.drupaleasy.com/training/workshops/introduction-drupal-8-module-development.
 
 ### Usage
-Download or clone this repository to a "user_blocker" folder inside your site's 
-"modules" directory. Be sure the containing directory is named "user_blocker".
+Download or clone this repository to your site's "modules" directory. Be sure the containing directory 
+is named "user_blocker".
 
 The "master" branch contains the starting point for the exercise, useful for those without 
 access to Drupal Console or Drush. 
 
-The "complete" branch contains the completed module, based on workshop instructions.
+The "complete" branch contains the completed module, including all student exercises, based on workshop instructions.
