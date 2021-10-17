@@ -1,9 +1,9 @@
 # user_blocker
-User Blocker module for Drupal 8. This module provides a form that allows a permissioned user
+User Blocker module for Drupal 8 and 9. This module provides a form that allows a permissioned user
 to block another user.
 
-## Introduction to Drupal 8 Module Development workshop
-This module is used in the Introduction to Drupal 8 Module Development workshop, 
+## Introduction to Drupal 8 and 9 Module Development workshop
+This module is used in the Introduction to Drupal 8 and 9 Module Development workshop, 
 written by DrupalEasy and Six Mile Tech. For additional information about this 
 workshop, see https://www.drupaleasy.com/training/workshops/introduction-drupal-8-module-development.
 
