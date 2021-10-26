@@ -1,4 +1,4 @@
-block users:
+administer user_blocker configuration:
   title: 'Administer user_blocker configuration'
   description: 'Optional description.'
   restrict access: true
