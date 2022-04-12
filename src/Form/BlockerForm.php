@@ -56,6 +56,7 @@ final class BlockerForm extends FormBase {
   */
   /*
   public function validateForm(array &$form, FormStateInterface $form_state): void {
+    parent::validateForm($form, $form_state);
     $username = $form_state->getValue('username');
     $user = user_load_by_name($username);
     if (empty($user)) {
@@ -82,6 +83,7 @@ final class BlockerForm extends FormBase {
    * This is the autocomplete version.
    */
   public function validateForm(array &$form, FormStateInterface $form_state): void {
+    parent::validateForm($form, $form_state);
     $uid = $form_state->getValue('uid');
     $current_user = \Drupal::currentUser();
     if ($uid == $current_user->id()) {
