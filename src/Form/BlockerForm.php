@@ -31,6 +31,7 @@ final class BlockerForm extends FormBase {
       '#maxlength' => 64,
       '#size' => 64,
       '#weight' => '0',
+      '#required' => TRUE,
     ];
     */
     // This is the autocomplete version.
@@ -39,6 +40,7 @@ final class BlockerForm extends FormBase {
       '#description' => $this->t('Enter the username of the user you want to block.'),
       '#type' => 'entity_autocomplete',
       '#target_type' => 'user',
+      '#required' => TRUE,
     ];
 
     $form['submit'] = [
