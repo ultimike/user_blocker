@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\user_blocker\Functional;
 
 use Drupal\Tests\BrowserTestBase;
