@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Drupal\user_blocker\Form;
 
@@ -91,7 +93,7 @@ final class BlockerForm extends FormBase {
     if ($uid == $current_user->id()) {
       $form_state->setError(
         $form['uid'],
-        $this->t('You cannot block your own account.')
+        $this->t('You cannot block your own account.')->render()
       );
     }
   }
